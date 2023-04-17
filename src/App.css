@@ -29,6 +29,18 @@
   color: #61dafb;
 }
 
+.btn-primary {
+  background-color: #337ab7 !important;
+}
+
+.btn-success {
+  background-color: #337ab7!important;
+}
+
+.btn-danger {
+  background-color: #d32f2f!important;
+}
+
 h1 {
   text-align: left;
 }

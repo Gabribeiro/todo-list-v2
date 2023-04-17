@@ -14,7 +14,8 @@ class Items extends React.Component {
       id: 0,
       name: '',
       items: [],
-      showModal: false
+      showModal: false,
+      showConfirmDialogModal: false
     };
   }
 
@@ -157,7 +158,7 @@ class Items extends React.Component {
     const { items, isLoading, error } = this.state;
 
     if (isLoading) {
-      return <p>Carregando lista de tarefas, por favor aguarde...</p>;
+      return <h4>Carregando, por favor aguarde...</h4>;
     }
 
     if (error) {
@@ -180,7 +181,7 @@ class Items extends React.Component {
                 <Button className="editBtn" variant="success" onClick={() => this.getItemData(item.id)}>
                   Editar
                 </Button>
-                <Button variant="danger" onClick={() => this.deleteItem(item.id)}>
+                <Button variant="danger" onClick={() => this.setState({ showConfirmDialogModal: true, id: item.id })}>
                   Excluir
                 </Button>
               </td>
@@ -203,7 +204,7 @@ class Items extends React.Component {
           </Modal.Header>
           <Modal.Body>
             <Form>
-              <Form.Group className="mb-3">
+              <Form.Group className="mb-3 hidden">
                 <Form.Label>ID</Form.Label>
                 <Form.Control type="text" value={this.state.id} readOnly={true} />
               </Form.Group>
@@ -222,6 +223,27 @@ class Items extends React.Component {
             </Button>
           </Modal.Footer>
         </Modal>
+
+        <Modal show={this.state.showConfirmDialogModal} onHide={() => this.setState({ showModal: false })}>
+          <Modal.Header closeButton>
+            <Modal.Title>Confirmação</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            Tem certeza que deseja excluir esta tarefa?
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="danger" onClick={() => {
+              this.deleteItem(this.state.id);
+              this.setState({ showConfirmDialogModal: false });
+            }}>
+              Excluir
+            </Button>
+            <Button variant="secondary" onClick={() => this.setState({ showConfirmDialogModal: false })}>
+              Cancelar
+            </Button>
+          </Modal.Footer>
+        </Modal>
+
 
         <div className="row">
           <div className="col">
