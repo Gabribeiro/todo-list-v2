@@ -241,7 +241,7 @@ class Items extends React.Component {
             </Form>
           </Modal.Body>
           <Modal.Footer>
-            <CButton variant="ghost" color='info' type="submit" onClick={this.submitForm}>
+            <CButton variant="ghost" color='info' disabled={this.state.name === '' ? true : false} type="submit" onClick={this.submitForm}>
               Salvar
             </CButton>
             <CButton variant="ghost" color='dark' onClick={this.handleClose}>
