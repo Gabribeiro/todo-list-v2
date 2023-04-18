@@ -175,7 +175,7 @@ class Items extends React.Component {
     const { items, isLoading, error } = this.state;
 
     if (isLoading) {
-      return <CSpinner/>;
+      return <CSpinner />;
     }
 
     if (error) {
@@ -184,6 +184,7 @@ class Items extends React.Component {
 
     return (
 
+      // Container com tabela para listagem de tarefas
       <CContainer>
         <CTable>
           <CTableHead>
