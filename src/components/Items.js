@@ -198,6 +198,7 @@ class Items extends React.Component {
     return (
       <div>
 
+        {/* Modal com formulário de inclusão e edição de tarefa */}
         <Modal show={this.state.showModal} onHide={this.handleClose}>
           <Modal.Header closeButton>
             <Modal.Title>Adicionar/Editar Tarefa</Modal.Title>
@@ -224,6 +225,7 @@ class Items extends React.Component {
           </Modal.Footer>
         </Modal>
 
+        {/* Modal com diálogo de confirmação de exclusão de tarefa */}
         <Modal show={this.state.showConfirmDialogModal} onHide={() => this.setState({ showModal: false })}>
           <Modal.Header closeButton>
             <Modal.Title>Confirmação</Modal.Title>
@@ -244,7 +246,7 @@ class Items extends React.Component {
           </Modal.Footer>
         </Modal>
 
-
+        {/* Linha com duas colunas, uma com o título do componente e a outra com o botão de novo cadastro */}
         <div className="row">
           <div className="col">
             <h1>Lista de Tarefas</h1>
@@ -263,4 +265,5 @@ class Items extends React.Component {
   }
 }
 
+// Exporta o componente permitindo que o importe em outros lugares
 export default Items;
