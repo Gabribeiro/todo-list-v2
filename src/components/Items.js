@@ -1,6 +1,22 @@
-import React from "react";
+import React from 'react'
+import {
+  CTable,
+  CTableBody,
+  CTableDataCell,
+  CTableHead,
+  CTableHeaderCell,
+  CTableRow,
+  CContainer,
+  CButton,
+  CRow,
+  CCol,
+  CTooltip
+
+} from '@coreui/react'
+import CIcon from '@coreui/icons-react';
+import { cilTrash, cilPencil } from '@coreui/icons';
 import axios from "axios";
-import { Table, Button, Form, Modal } from "react-bootstrap";
+import { Form, Modal } from "react-bootstrap";
 import './Items.css';
 
 class Items extends React.Component {
@@ -166,29 +182,38 @@ class Items extends React.Component {
     }
 
     return (
-      <Table striped bordered hover>
-        <thead>
-          <tr>
-            <th className="text-start tarefa">Tarefa</th>
-            <th className="acoes">Ações</th>
-          </tr>
-        </thead>
-        <tbody>
-          {items.map((item) => (
-            <tr key={item.id}>
-              <td className="text-start">{item.name}</td>
-              <td className="text-end">
-                <Button className="editBtn" variant="success" onClick={() => this.getItemData(item.id)}>
-                  Editar
-                </Button>
-                <Button variant="danger" onClick={() => this.setState({ showConfirmDialogModal: true, id: item.id })}>
-                  Excluir
-                </Button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </Table>
+
+      <CContainer>
+        <CTable>
+          <CTableHead>
+            <CTableRow color="light">
+              <CTableHeaderCell scope="col" className="text-start tarefa">Tarefa</CTableHeaderCell>
+              <CTableHeaderCell scope="col" className="acoes">Ações</CTableHeaderCell>
+            </CTableRow>
+          </CTableHead>
+          <CTableBody>
+            {items.map((item) => (
+              <CTableRow key={item.id}>
+                <CTableDataCell className="text-start">{item.name}</CTableDataCell>
+                <CTableDataCell>
+                  <CTooltip
+                    content="Editar tarefa"
+                    placement="left"
+                  >
+                    <CButton variant="ghost" color='info' className="editBtn" size="sm" onClick={() => this.getItemData(item.id)}><CIcon icon={cilPencil}></CIcon></CButton>
+                  </CTooltip>
+                  <CTooltip
+                    content="Excluir tarefa"
+                    placement="right"
+                  >
+                    <CButton variant="ghost" color="danger" size="sm" onClick={() => this.setState({ showConfirmDialogModal: true, id: item.id })}><CIcon icon={cilTrash}></CIcon></CButton>
+                  </CTooltip>
+                </CTableDataCell>
+              </CTableRow>
+            ))}
+          </CTableBody>
+        </CTable>
+      </CContainer>
 
     );
   }
@@ -196,7 +221,7 @@ class Items extends React.Component {
   // Função que renderiza todos os componentes
   render() {
     return (
-      <div>
+      <CContainer>
 
         {/* Modal com formulário de inclusão e edição de tarefa */}
         <Modal show={this.state.showModal} onHide={this.handleClose}>
@@ -216,12 +241,12 @@ class Items extends React.Component {
             </Form>
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="primary" type="submit" onClick={this.submitForm}>
+            <CButton variant="ghost" color='info' type="submit" onClick={this.submitForm}>
               Salvar
-            </Button>
-            <Button variant="secondary" onClick={this.handleClose}>
+            </CButton>
+            <CButton variant="ghost" color='dark' onClick={this.handleClose}>
               Fechar
-            </Button>
+            </CButton>
           </Modal.Footer>
         </Modal>
 
@@ -234,33 +259,33 @@ class Items extends React.Component {
             Tem certeza que deseja excluir esta tarefa?
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="danger" onClick={() => {
+            <CButton variant="ghost" color='danger' onClick={() => {
               this.deleteItem(this.state.id);
               this.setState({ showConfirmDialogModal: false });
             }}>
               Excluir
-            </Button>
-            <Button variant="secondary" onClick={() => this.setState({ showConfirmDialogModal: false })}>
+            </CButton>
+            <CButton variant="ghost" color='dark' onClick={() => this.setState({ showConfirmDialogModal: false })}>
               Cancelar
-            </Button>
+            </CButton>
           </Modal.Footer>
         </Modal>
 
         {/* Linha com duas colunas, uma com o título do componente e a outra com o botão de novo cadastro */}
-        <div className="row">
-          <div className="col">
+        <CRow>
+          <CCol>
             <h1>Lista de Tarefas</h1>
-          </div>
-          <div className="text-end col">
-            <Button className="addBtn" onClick={this.resetForm}>
-              Cadastrar nova tarefa
-            </Button>
-          </div>
-        </div>
+          </CCol>
+          <CCol className="text-end">
+            <CButton variant="ghost" color="info" onClick={this.resetForm}>
+              Nova tarefa
+            </CButton>
+          </CCol>
+        </CRow>
 
         {this.renderTable()}
 
-      </div>
+      </CContainer>
     )
   }
 }
