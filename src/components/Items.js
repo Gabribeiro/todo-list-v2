@@ -10,7 +10,8 @@ import {
   CButton,
   CRow,
   CCol,
-  CTooltip
+  CTooltip,
+  CSpinner
 
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react';
@@ -174,7 +175,7 @@ class Items extends React.Component {
     const { items, isLoading, error } = this.state;
 
     if (isLoading) {
-      return <h4>Carregando, por favor aguarde...</h4>;
+      return <CSpinner/>;
     }
 
     if (error) {
