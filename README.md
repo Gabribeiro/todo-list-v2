@@ -14,6 +14,7 @@ HTML para marcação,
 CSS para estilização,
 AXIOS para consumo de API,
 Bootstrap como biblioteca de CSS.
+CoreUI como biblioteca de CSS.
 
 Pré-requisitos:
 Node.js instalado,
